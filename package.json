@@ -1,0 +1,25 @@
+{
+  "name": "NFT-pricing",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "truffle test --network development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-stam/NFT-pricing.git"
+  },
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/i-stam/NFT-pricing/issues"
+  },
+  "homepage": "https://github.com/i-stam/NFT-pricing#readme",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.0.32",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "openzeppelin-solidity": "3.0.1",
+    "truffle": "5.1.15"
+  }
+}
