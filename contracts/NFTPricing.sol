@@ -24,4 +24,8 @@ contract  NFTPricing is Ownable, ERC721 {
     function balance() external view returns(uint256) {
         return address(this).balance;
     }
+
+    function withdraw(address payable _to, uint256 _amount) external onlyOwner {
+        _to.transfer(_amount);
+    }
 }

@@ -146,6 +146,65 @@
                     "method": "acquireNFT"
                 }
             ]
+        },
+        {
+            "id": "withdraw",
+            "title": "Send",
+            "description": "Withdraw ETH",
+            "image": {
+                "url": "https://i.ibb.co/xqF4NWv/icons8-send-96.png"
+            },
+            "inputs": [
+                {
+                    "name": "contractAddress",
+                    "title": "Contract address",
+                    "type": "address",
+                    "validation": [
+                        {
+                            "type": "allowedTypes",
+                            "contract": true
+                        }
+                    ]
+                },
+                {
+                    "name": "recipient",
+                    "title": "Recipient",
+                    "type": "address",
+                    "validation": [
+                        {
+                            "type": "allowedTypes",
+                            "eoa": true,
+                            "contract": true
+                        }
+                    ]
+                },
+                {
+                    "name": "amount",
+                    "title": "Amount to send",
+                    "type": "int",
+                    "unit": "Token",
+                    "scale": "18",
+                    "validation": [
+                        {
+                            "type": "range",
+                            "min": "1",
+                            "max": "1000000000"
+                        }
+                    ]
+                }
+            ],
+            "execs": [
+                {
+                    "type": "send",
+                    "contract": "NFTPricing",
+                    "address": "@input[contractAddress]",
+                    "method": "withdraw",
+                    "args": {
+                        "_to": "@input[recipient]",
+                        "_amount": "@input[amount]"
+                    }
+                }
+            ]
         }
     ]
 }
