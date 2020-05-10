@@ -6,8 +6,8 @@ import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 
 contract  NFTPricing is Ownable, ERC721 {
 
-    uint256 NFTPrice;
-    uint256 NFTsIssued;
+    uint256 public NFTPrice;
+    uint256 public NFTsIssued;
 
     constructor(uint256 _startPrice) public ERC721("nifty", "nft") {
         require(_startPrice != 0, "Starting price should not be 0");
@@ -19,5 +19,9 @@ contract  NFTPricing is Ownable, ERC721 {
         _safeMint(msg.sender, NFTsIssued);
         NFTPrice = NFTPrice.mul(2);
         NFTsIssued += 1;
+    }
+
+    function balance() external view returns(uint256) {
+        return address(this).balance;
     }
 }

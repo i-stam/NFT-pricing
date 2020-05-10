@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "truffle test --network development"
+    "clean": "rm -r build",
+    "test": "truffle test --network development",
+    "start": "truffle compile --all && solui view --spec contracts/ui.json --artifacts build/contracts"
   },
   "repository": {
     "type": "git",

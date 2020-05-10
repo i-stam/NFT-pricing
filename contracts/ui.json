@@ -1,0 +1,151 @@
+{
+    "version": 1,
+    "id": "NFT-pricing",
+    "title": "Art NFT pricing ",
+    "description": "Deploy your own NFT contract.",
+    "aboutUrl": "https://github.com/solui/demo",
+    "image": {
+        "url": "https://i.ibb.co/6WStKrv/icons8-drawing-96.png"
+    },
+    "constants": {
+        "ethToken": {
+          "default":
+            {
+              "label": "ETH",
+              "address": "0x0000000000000000000000000000000000000000"
+            }   
+        }
+      },
+    "panels": [
+        {
+            "id": "create",
+            "title": "Create NFT factory",
+            "description": "Deploy new NFT-pricing contract.",
+            "image": {
+                "url": "https://i.ibb.co/g79xx1y/icons8-factory-96.png"
+            },
+            "inputs": [
+                {
+                    "name": "price",
+                    "title": "Initial price",
+                    "type": "int",
+                    "unit": "Token",
+                    "scale": "18",
+                    "validation": [
+                        {
+                            "type": "range",
+                            "min": "1",
+                            "max": "1000000000"
+                        }
+                    ]
+                }
+            ],
+            "execs": [
+                {
+                    "type": "deploy",
+                    "contract": "NFTPricing",
+                    "args": {
+                        "_startPrice": "@input[price]"
+                    },
+                    "saveResultAsInput": "contractAddress"
+                }
+            ],
+            "outputs": [
+                {
+                    "title": "Contract address",
+                    "type": "address",
+                    "value": "@input[contractAddress]"
+                }
+            ]
+        },
+        {
+            "id": "view",
+            "title": "View contract state",
+            "description": "View wallet state.",
+            "image": {
+                "url": "https://i.ibb.co/0fJPJtB/icons8-art-book-96.png"
+            },
+            "inputs": [
+                {
+                    "name": "contractAddress",
+                    "title": "NFT contract address",
+                    "type": "address",
+                    "validation": [
+                        {
+                            "type": "allowedTypes",
+                            "contract": true
+                        }
+                    ]
+                }
+            ],
+            "execs": [
+                {
+                    "type": "call",
+                    "contract": "NFTPricing",
+                    "address": "@input[contractAddress]",
+                    "method": "NFTPrice",
+                    "saveResultAsInput": "price"
+                },
+                {
+                    "type": "call",
+                    "contract": "NFTPricing",
+                    "address": "@input[contractAddress]",
+                    "method": "NFTsIssued",
+                    "saveResultAsInput": "nftCounter"
+                },
+                {
+                    "type": "call",
+                    "contract": "NFTPricing",
+                    "address": "@input[contractAddress]",
+                    "method": "balance",
+                    "saveResultAsInput": "balance"
+                }
+            ],
+            "outputs": [
+                {
+                    "title": "Current Price",
+                    "type": "int",
+                    "value": "@input[price]"
+                },
+                {
+                    "title": "NFTs sold",
+                    "type": "int",
+                    "value": "@input[nftCounter]"
+                }, {
+                    "title": "Contract Balance",
+                    "type": "int",
+                    "value": "@input[balance]"
+                }
+            ]
+        },
+        {
+            "id": "acquireNFT",
+            "title": "acquireNFT",
+            "description": "Buy a piece at current price",
+            "image": {
+                "url": "https://i.ibb.co/wMzLjdd/icons8-art-prices-96.png"
+            },
+            "inputs": [
+                {
+                    "name": "contractAddress",
+                    "title": "Contract address",
+                    "type": "address",
+                    "validation": [
+                        {
+                            "type": "allowedTypes",
+                            "contract": true
+                        }
+                    ]
+                }
+            ],
+            "execs": [
+                {
+                    "type": "send",
+                    "contract": "NFTPricing",
+                    "address": "@input[contractAddress]",
+                    "method": "acquireNFT"
+                }
+            ]
+        }
+    ]
+}
