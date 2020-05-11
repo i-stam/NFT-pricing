@@ -136,20 +136,34 @@
                             "contract": true
                         }
                     ]
-                }
+                },
+                {
+                    "name": "amount",
+                    "title": "Amount of ETH",
+                    "type": "int",
+                    "scale": "18",
+                    "validation": [
+                      {
+                        "type": "range",
+                        "min": "1",
+                        "max": "1000000000"
+                      }
+                    ]
+                  }
             ],
             "execs": [
                 {
                     "type": "send",
                     "contract": "NFTPricing",
                     "address": "@input[contractAddress]",
-                    "method": "acquireNFT"
+                    "method": "acquireNFT",
+                    "transferAmount": "@input[amount]"
                 }
             ]
         },
         {
             "id": "withdraw",
-            "title": "Send",
+            "title": "Withdraw",
             "description": "Withdraw ETH",
             "image": {
                 "url": "https://i.ibb.co/xqF4NWv/icons8-send-96.png"
@@ -180,7 +194,7 @@
                 },
                 {
                     "name": "amount",
-                    "title": "Amount to send",
+                    "title": "Amount to withdraw",
                     "type": "int",
                     "unit": "Token",
                     "scale": "18",
