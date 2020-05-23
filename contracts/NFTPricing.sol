@@ -1,3 +1,12 @@
+/**
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version, see <https://www.gnu.org/licenses/>.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY;
+ */
+
 pragma solidity ^0.6.7;
 
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
